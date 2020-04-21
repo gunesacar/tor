@@ -765,7 +765,10 @@ node_is_possible_guard(const node_t *node)
    * holds. */
 
   tor_assert(node);
-  return (node->is_possible_guard &&
+  // Don't expect guard flag when selecting guards
+  // We use this modification in combination with EntryNode config
+  // to use our middle relay as the guard node.
+  return ( // node->is_possible_guard &&
           node->is_stable &&
           node->is_fast &&
           node->is_valid &&
